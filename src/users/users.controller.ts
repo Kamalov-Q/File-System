@@ -11,10 +11,13 @@ import {
 import { type ResponseReturning, UsersService } from './users.service';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import { BackupService } from 'src/common/backup.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService
+  ) {}
 
   @Get()
   getAllUsers(): Promise<ResponseReturning> {
@@ -27,6 +30,11 @@ export class UsersController {
   ): Promise<ResponseReturning> {
     return this?.usersService?.getUserById(id);
   }
+
+  // @Get('test-backup')
+  // test() {
+  //   return this.backupService.zipUsersFile();
+  // }
 
   @Post()
   createUser(@Body() createU: CreateUserDto): Promise<ResponseReturning> {
